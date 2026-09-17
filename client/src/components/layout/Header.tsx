@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { IoIosContrast } from "react-icons/io";
-import { Menu, Rabbit, ShoppingCart, User, X } from "lucide-react";
+import { Menu, ShoppingCart, User, X } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useState } from "react";
@@ -26,8 +26,8 @@ export default function Header() {
             to={"/"}
             className="tracking-tighter max-lg:translate-x-1/6 flex items-center gap-1"
           >
-            <Rabbit size={44} strokeWidth={1.25} />
-            <h1 className="font-serif font-black text-5xl">badbit</h1>
+            <h1 className="font-serif font-black text-5xl">moedas</h1>
+            <span>®</span>
           </Link>
 
           <nav className="flex gap-3 text-lg max-lg:hidden">
@@ -68,7 +68,10 @@ export default function Header() {
             >
               <User size={26} />
             </Link>
-            <Link to={"/cart"} className="hover:-translate-y-1 hover:cursor-pointer transition-all duration-300">
+            <Link
+              to={"/cart"}
+              className="hover:-translate-y-1 hover:cursor-pointer transition-all duration-300"
+            >
               <ShoppingCart size={26} />
             </Link>
             <button
