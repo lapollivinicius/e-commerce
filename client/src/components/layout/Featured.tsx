@@ -17,7 +17,7 @@ const data: card = {
 
 export default function Featured() {
   const [index, setIndex] = useState(0);
-  const STEP = 240 + 20; // w-70 + gap-5
+  const STEP = 280 + 20; // w-70 + gap-5
   const products = [data, data, data, data, data, data];
 
   const next = () => {

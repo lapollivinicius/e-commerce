@@ -24,7 +24,7 @@ export default function Header() {
 
           <Link
             to={"/"}
-            className="tracking-tighter max-lg:translate-x-1/6 flex items-center gap-1"
+            className="tracking-tighter max-lg:translate-x-1/7 flex items-center gap-1"
           >
             <h1 className="font-serif font-black text-5xl">moedas</h1>
             <span>®</span>
