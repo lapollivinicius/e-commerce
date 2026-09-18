@@ -5,7 +5,7 @@ import Anchor from "../ui/Anchor";
 export default function Hero() {
   return (
     <section className="section relative flex w-full items-center justify-center overflow-hidden">
-      <div className="container relative z-20">
+      <div className="container z-20">
         <div className="h-150 flex justify-start items-center">
           <div className="flex flex-col items-start gap-5 text-background">
             <h2 className="font-black text-6xl leading-13 tracking-tighter">

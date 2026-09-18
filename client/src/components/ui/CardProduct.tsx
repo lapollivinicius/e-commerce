@@ -9,7 +9,6 @@ type propsCard = {
 export default function CardProduct({ data }: propsCard) {
   return (
     <div className="w-70 flex flex-col gap-2">
-
       <div className="relative w-full h-90 overflow-hidden bg-red-500 rounded-[1em]">
         <img
           src={data.thumb}
@@ -36,7 +35,6 @@ export default function CardProduct({ data }: propsCard) {
         <ShoppingCart size={16} />
         ADD TO CART
       </Button>
-
     </div>
   );
 }

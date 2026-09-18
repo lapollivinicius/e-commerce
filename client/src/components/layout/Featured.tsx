@@ -94,7 +94,7 @@ export default function Featured() {
             </div>
             <Anchor to={"/products"}>
               <p>SEE MORE</p>
-              <ArrowRight size={16}  />
+              <ArrowRight size={16} />
             </Anchor>
           </div>
         </div>
