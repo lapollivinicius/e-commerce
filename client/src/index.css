@@ -4,14 +4,14 @@
 :root, .light {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #99cc98;
+  --primary: #8bb68a;
   --outground: #dfdfdf;
 }
 
 .dark {
   --background: #171717;
   --foreground: #ffffff;
-  --primary: #99cc98;
+  --primary: #8bb68a;
   --outground: #161616;
 }
 
