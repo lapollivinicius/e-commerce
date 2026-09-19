@@ -5,14 +5,14 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary: #8bb68a;
-  --outground: #dfdfdf;
+  --outground: #242424;
 }
 
 .dark {
   --background: #171717;
   --foreground: #ffffff;
   --primary: #8bb68a;
-  --outground: #161616;
+  --outground: #dfdfdf;
 }
 
 @theme {
