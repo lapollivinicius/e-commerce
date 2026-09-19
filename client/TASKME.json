@@ -1,0 +1,76 @@
+{
+  "tasks": [
+    {
+      "id": "7a2dafd4",
+      "content": "products",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828819354
+    },
+    {
+      "id": "af04197c",
+      "content": "collections",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828830227
+    },
+    {
+      "id": "1fadb7e7",
+      "content": "about us",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828871318
+    },
+    {
+      "id": "e72cc7b9",
+      "content": "drops",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828879896
+    },
+    {
+      "id": "51407cbe",
+      "content": "product page",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828918522
+    },
+    {
+      "id": "206dddc3",
+      "content": "terms and policies",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828933115
+    },
+    {
+      "id": "f04e7121",
+      "content": "cart",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828954161
+    },
+    {
+      "id": "e9c6e79c",
+      "content": "login",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828966933
+    },
+    {
+      "id": "988a4b59",
+      "content": "account page",
+      "time": 0,
+      "checked": false,
+      "createdAt": 1789828992522
+    }
+  ],
+  "history": [
+    {
+      "id": "2f468cde",
+      "content": "home",
+      "time": 0,
+      "checked": true,
+      "createdAt": 1789829002995
+    }
+  ]
+}
