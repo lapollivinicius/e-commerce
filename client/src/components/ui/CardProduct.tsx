@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import type { card } from "../../types/card";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 type propsCard = {
   data: card;
@@ -21,15 +22,16 @@ export default function CardProduct({ data }: propsCard) {
         </span>
       </div>
 
-      <div className="mt-3">
+      <Link to={`/products/${data.id}`} draggable="false" className="mt-3">
         <p className="font-semibold truncate">{data.title}</p>
+        <p className="text-gray-500 text-sm">Prices from </p>
         <div className="flex items-center gap-2">
           <p className="text-sm line-through opacity-50">
             ${data.comparison_price}
           </p>
           <p className="font-bold">${data.price}</p>
         </div>
-      </div>
+      </Link>
 
       <Button className="flex justify-center items-center gap-2">
         <ShoppingCart size={16} />

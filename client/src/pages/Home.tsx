@@ -6,6 +6,7 @@ import Header from "../components/layout/Header";
 import Hero from "../components/layout/Hero";
 import Newsletter from "../components/layout/Newsletter";
 import TextSlide from "../components/layout/TextSlide";
+import Footer from "../components/layout/Footer";
 
 export default function Home() {
   const [showFixedHeader, setShowFixedHeader] = useState(false);
@@ -30,7 +31,7 @@ export default function Home() {
           transition-all duration-300
           ${
             showFixedHeader
-              ? "translate-y-0 opacity-100"
+              ? "translate-y-0 opacity-90"
               : "-translate-y-full opacity-0 pointer-events-none"
           }
         `}
@@ -45,6 +46,7 @@ export default function Home() {
       <Banner />
       <Categories />
       <Newsletter />
+      <Footer />
     </div>
   );
 }
