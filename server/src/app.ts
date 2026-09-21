@@ -1,8 +1,7 @@
 import express, { type Express } from "express";
 import session from "express-session";
 import { sessionConfig } from "./config/session.config.ts";
-import { setupDatabase } from "./database/database.ts";
-import router from "./routes/routes.ts";
+import router from "./routes/index.ts";
 
 const app: Express = express();
 
