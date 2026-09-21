@@ -3,7 +3,7 @@ import * as path from "node:path";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import dotenv from "dotenv";
-import { database } from "./database/database.ts";
+import Database from "./database/db.js";
 
 // load envs
 dotenv.config();
@@ -11,12 +11,16 @@ dotenv.config();
 const PgSession = pgSession(session);
 const _dirname = process.cwd();
 const app: Express = express();
+const db = Database.connect();
+
+// setup schemas in db
+Database.setup(db)
 
 // config session store via pg-node
 app.use(
   session({
     store: new PgSession({
-      pool: database,
+      pool: db,
     }),
     secret: process.env.SESSION_SECRET!,
     resave: false,
@@ -32,6 +36,10 @@ app.use(
 
 // serving static file from public folder
 app.use(express.static(path.join(_dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.send("Hello!")
+})
 
 // default to listen the server
 app.listen(3000, () => {
