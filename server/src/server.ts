@@ -3,7 +3,7 @@ import * as path from "node:path";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import dotenv from "dotenv";
-import { database } from "./config/database.ts";
+import { database } from "./database/database.ts";
 
 // load envs
 dotenv.config();
