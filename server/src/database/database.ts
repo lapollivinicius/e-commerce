@@ -3,18 +3,18 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Pool } from "pg";
 
-export default class Database {
-  static connect(): Pool {
-    return new Pool({ connectionString: process.env.DATABASE_URL! });
-  }
+export function connectDatabase(): Pool {
+  return new Pool({
+    connectionString: process.env.DATABASE_URL!,
+  });
+}
 
-  static async setup(database: Pool) {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = join(__filename, "..");
+export async function setupDatabase(): Promise<void> {
+  const database = connectDatabase();
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = join(__filename, "..");
+  const path = join(__dirname, "migrations", "001_migration.sql");
+  const migration = await readFile(path, "utf-8");
 
-    const path = join(__dirname, "migrations", "001_migration.sql");
-    const migration = await readFile(path, "utf-8");
-
-    await database.query(migration);
-  }
+  await database.query(migration);
 }
