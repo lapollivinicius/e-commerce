@@ -1,12 +1,12 @@
 import session from "express-session";
 import pgSession from "connect-pg-simple";
-import { connectDatabase } from "@/database/pool.js";
+import { database } from "@/database/pool.js";
 
 const PgSession = pgSession(session);
 
 export const sessionConfig: session.SessionOptions = {
   store: new PgSession({
-    pool: connectDatabase(),
+    pool: database,
   }),
   secret: process.env.SESSION_SECRET!,
   resave: false,
