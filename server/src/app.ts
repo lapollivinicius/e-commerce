@@ -1,7 +1,7 @@
 import express, { type Express } from "express";
 import session from "express-session";
-import { sessionConfig } from "./config/session.config.ts";
-import router from "./routes/index.ts";
+import { sessionConfig } from "@/config/session.config.js";
+import router from "@/routes/index.js";
 
 const app: Express = express();
 

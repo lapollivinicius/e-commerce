@@ -1,6 +1,6 @@
 import session from "express-session";
 import pgSession from "connect-pg-simple";
-import { connectDatabase } from "../database/database.js";
+import { connectDatabase } from "@/database/database.js";
 
 const PgSession = pgSession(session);
 
