@@ -33,9 +33,8 @@ list products
   "pagination": {
     "page": 0,
     "limit": 0,
-    "total": 0
-  },
-  "sucess": [true || false],
-  "error": ["" || null]
+    "total": 0,
+    "sort": ""
+  }
 }
 ```
