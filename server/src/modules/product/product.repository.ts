@@ -1,16 +1,77 @@
 import { database } from "@/database/pool.js";
-import type { productQueryType, productResponseType, productType } from "./product.schema.js";
+import type {
+  productQueryType,
+  productType,
+} from "@/modules/product/product.schema.js";
 
 export async function findAll(query: productQueryType): Promise<productType[]> {
-  const { rows } = await database.query(`
+  const { rows } = await database.query(
+    `
     SELECT
       p.product_id,
       p.title,
       p.slug,
-      c.category
+      p.tags,
+      p.brand,
+      c.category,
+      v.price,
+      v.comparison_price
     FROM products p
+
     INNER JOIN categories c
-      ON c.category_id = p.category_id;
-    `);
+      ON c.category_id = p.category_id
+
+    INNER JOIN LATERAL (
+      SELECT
+        v.price,
+        v.comparison_price
+      FROM variants v
+      WHERE v.product_id = p.product_id
+      ORDER BY v.variant_id
+      LIMIT 1
+    ) v ON true;
+    `
+  );
+  return rows;
+}
+
+export async function findBySlug(slug: string): Promise<productType[]> {
+  const { rows } = await database.query(
+    `
+    SELECT
+      p.product_id,
+      p.title,
+      p.slug,
+
+      v.variant_id,
+      v.price,
+      v.comparison_price,
+      v.stock,
+      v.sku,
+
+      o.option_id,
+      o.name AS option_name,
+      o.value AS option_value
+
+    FROM products p
+
+    INNER JOIN categories c
+      ON c.category_id = p.category_id
+
+    LEFT JOIN variants v
+      ON v.product_id = p.product_id
+
+    LEFT JOIN options o
+      ON o.variant_id = v.variant_id
+
+    WHERE p.slug = $1
+
+    ORDER BY
+      v.variant_id,
+      o.option_id;
+    `,
+    [slug],
+  );
+  console.log(rows)
   return rows;
 }

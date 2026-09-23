@@ -26,8 +26,8 @@ list products
       "price": 0,
       "comparison_price": 0,
       "tags": ["", ""],
-      "category": "",
-      "brand": ""
+      "brand": "",
+      "category": ""
     }
   ],
   "pagination": {
@@ -35,6 +35,42 @@ list products
     "limit": 0,
     "total": 0,
     "sort": ""
+  }
+}
+```
+
+#### GET /products/slug
+
+**no queries**
+
+```json
+{
+  "data": {
+    "title": "",
+    "slug": "",
+    "description": "",
+    "brand": "",
+    "tags": [""],
+    "metadata": {},
+    "category": "",
+    "variants": [
+      {
+        "price": 0,
+        "comparison_price": 0,
+        "stock": 0,
+        "sku": "",
+        "height": 0,
+        "width": 0,
+        "length": 0,
+        "weight": 0,
+        "options": [
+          {
+            "name": "",
+            "value": ""
+          }
+        ]
+      }
+    ]
   }
 }
 ```

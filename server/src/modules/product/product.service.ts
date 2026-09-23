@@ -1,12 +1,13 @@
-import { findAll } from "./product.repository.js";
+import { findAll, findBySlug } from "./product.repository.js";
 import type {
   productQueryType,
-  productResponseType,
+  productsResponseType,
+  productType,
 } from "./product.schema.js";
 
 export async function listProducts(
   query: productQueryType,
-): Promise<productResponseType> {
+): Promise<productsResponseType> {
   const data = await findAll(query);
   const pagination = {
     page: query.page ?? 1,
@@ -14,4 +15,8 @@ export async function listProducts(
     count: data.length,
   };
   return { data, pagination };
+}
+
+export async function getProductBySlug(slug: string): Promise<productType[]> {
+  return await findBySlug(slug);
 }
