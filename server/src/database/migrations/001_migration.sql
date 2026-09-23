@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS variants (
     sku TEXT,
     height INTEGER,
     width INTEGER,
+    length INTEGER,
     weight INTEGER,
     FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE
 );
@@ -34,7 +35,7 @@ CREATE TABLE IF NOT EXISTS variants (
 CREATE TABLE IF NOT EXISTS options (
     option_id UUID PRIMARY KEY,
     variant_id UUID NOT NULL,
-    name TEXT NOT NULL,
+    name TEXT NOT NULL UNIQUE,
     value TEXT NOT NULL,
     FOREIGN KEY (variant_id) REFERENCES variants (variant_id) ON DELETE CASCADE
 );
