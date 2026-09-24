@@ -1,8 +1,9 @@
+import { mapProduct } from "./product.mapper.ts";
 import { findAll, findBySlug } from "./product.repository.js";
 import type {
   productQueryType,
   productsResponseType,
-  productType,
+  productDetailedType,
 } from "./product.schema.js";
 
 export async function listProducts(
@@ -17,6 +18,11 @@ export async function listProducts(
   return { data, pagination };
 }
 
-export async function getProductBySlug(slug: string): Promise<productType[]> {
-  return await findBySlug(slug);
+export async function getProductBySlug(slug: string) {
+  const rows = await findBySlug(slug);
+  const product = mapProduct(rows)
+
+  if(!product) return null
+
+  return { data: product }
 }

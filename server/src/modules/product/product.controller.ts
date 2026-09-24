@@ -26,10 +26,10 @@ export async function getProduct(
     const response = await getProductBySlug(slug);
 
     if(!response) {
-      res.status(404).json({msg: 'product not found'})
+      return res.status(404).json({msg: 'product not found'})
     }
 
-    res.status(200).json(response);
+    return res.status(200).json(response);
   } catch (err) {
     next(err);
   }

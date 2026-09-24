@@ -3,6 +3,7 @@ import type {
   productQueryType,
   productType,
 } from "@/modules/product/product.schema.js";
+import type { productDataRaw } from "./product.types.ts";
 
 export async function findAll(query: productQueryType): Promise<productType[]> {
   const { rows } = await database.query(
@@ -35,19 +36,29 @@ export async function findAll(query: productQueryType): Promise<productType[]> {
   return rows;
 }
 
-export async function findBySlug(slug: string): Promise<productType[]> {
+export async function findBySlug(slug: string): Promise<productDataRaw[]> {
   const { rows } = await database.query(
     `
     SELECT
       p.product_id,
       p.title,
       p.slug,
+      p.description,
+      p.tags,
+      p.brand,
+      p.metadata,
+
+      c.category,
 
       v.variant_id,
       v.price,
       v.comparison_price,
       v.stock,
       v.sku,
+      v.height,
+      v.width,
+      v.length,
+      v.weight,
 
       o.option_id,
       o.name AS option_name,
@@ -72,6 +83,5 @@ export async function findBySlug(slug: string): Promise<productType[]> {
     `,
     [slug],
   );
-  console.log(rows)
   return rows;
 }
