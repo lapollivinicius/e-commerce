@@ -1,9 +1,11 @@
-import type { Response } from "express";
+import type { ErrorRequestHandler } from "express";
 
-export function exceptionHandler(
-  err: unknown,
-  res: Response,
-) {
+export const exceptionHandler: ErrorRequestHandler = (
+  err,
+  req,
+  res,
+  next,
+) => {
   return res.status(400).json({
     success: false,
     error: {
@@ -11,4 +13,4 @@ export function exceptionHandler(
       message: "an exception occurred",
     },
   });
-}
+};
