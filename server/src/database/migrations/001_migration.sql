@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS variants (
 CREATE TABLE IF NOT EXISTS options (
     option_id UUID PRIMARY KEY,
     variant_id UUID NOT NULL,
-    name TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
     value TEXT NOT NULL,
     FOREIGN KEY (variant_id) REFERENCES variants (variant_id) ON DELETE CASCADE
 );
