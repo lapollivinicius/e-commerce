@@ -1,6 +1,6 @@
 import type { ErrorRequestHandler } from "express";
 
-export const exceptionHandler: ErrorRequestHandler = (
+export const errorHandler: ErrorRequestHandler = (
   err,
   req,
   res,
