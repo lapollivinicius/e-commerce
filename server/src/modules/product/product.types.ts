@@ -20,3 +20,7 @@ export type productDataRaw = {
   option_name: string;
   option_value: string;
 };
+
+export interface productParams {
+  slug: string;
+}

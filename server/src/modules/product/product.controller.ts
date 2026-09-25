@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
-import { productParamsSchema, productQuerySchema } from "./product.schema.js";
+import { ListProductsQueriesSchema } from "./product.schema.js";
 import { getProductBySlug, listProducts } from "./product.service.ts";
+import type { productParams } from "./product.types.ts";
 
 export async function getProducts(
   req: Request,
@@ -8,28 +9,37 @@ export async function getProducts(
   next: NextFunction,
 ) {
   try {
-    const query = productQuerySchema.parse(req.query);
+    const query = ListProductsQueriesSchema.parse(req.query);
     const response = await listProducts(query);
-    res.status(200).json(response);
+
+    if (!response) {
+      return res
+        .status(404)
+        .json({ success: false, error: "PRODUCTS_NOT_FOUND" });
+    }
+
+    res.status(200).json({ ...response, success: true, error: null });
   } catch (err) {
     next(err);
   }
 }
 
 export async function getProduct(
-  req: Request,
+  req: Request<productParams>,
   res: Response,
   next: NextFunction,
 ) {
   try {
-    const { slug } = productParamsSchema.parse(req.params);
+    const { slug } = req.params;
     const response = await getProductBySlug(slug);
 
-    if(!response) {
-      return res.status(404).json({msg: 'product not found'})
+    if (!response) {
+      return res
+        .status(404)
+        .json({ success: false, error: "PRODUCT_NOT_FOUND" });
     }
 
-    return res.status(200).json(response);
+    return res.status(200).json({ ...response, success: true, error: null });
   } catch (err) {
     next(err);
   }

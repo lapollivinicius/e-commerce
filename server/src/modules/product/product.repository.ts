@@ -1,11 +1,14 @@
 import { database } from "@/database/pool.js";
 import type {
-  productQueryType,
+  ListProductsQueriesType,
   productType,
 } from "@/modules/product/product.schema.js";
 import type { productDataRaw } from "./product.types.ts";
 
-export async function findAll(query: productQueryType): Promise<productType[]> {
+// TODO: apply query filters to the SQL query based on the provided query parameters
+export async function findAll(
+  query: ListProductsQueriesType,
+): Promise<productType[]> {
   const { rows } = await database.query(
     `
     SELECT
@@ -31,7 +34,7 @@ export async function findAll(query: productQueryType): Promise<productType[]> {
       ORDER BY v.variant_id
       LIMIT 1
     ) v ON true;
-    `
+    `,
   );
   return rows;
 }

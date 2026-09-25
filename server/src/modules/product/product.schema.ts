@@ -11,38 +11,48 @@ export const productSchema = z.object({
   comparison_price: z.number().int(),
 });
 
-export const productDetailedSchema = z.object({
-  product_id: z.uuid(),
-  title: z.string(),
-  slug: z.string(),
-  description: z.string(),
-  tags: z.array(z.string()),
-  brand: z.string(),
-  metadata: z.json(),
-  category: z.string(),
-  variants: z.array(
-    z.object({
-      variant_id: z.uuid(),
-      price: z.number().int(),
-      comparison_price: z.number().int(),
-      stock: z.number().int(),
-      sku: z.string().optional(),
-      height: z.number().int(),
-      width: z.number().int(),
-      length: z.number().int(),
-      weigth: z.number().int(),
-      options: z.array(
-        z.object({
-          option_id: z.uuid(),
-          option_name: z.string(),
-          option_value: z.string(),
-        }),
-      ),
-    }),
-  ),
+export const getProductSchema = z.object({
+  data: z.object({
+    product_id: z.uuid(),
+    title: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()),
+    brand: z.string(),
+    metadata: z.json(),
+    category: z.string(),
+    variants: z.array(
+      z.object({
+        variant_id: z.uuid(),
+        price: z.number().int().positive(),
+        comparison_price: z.number().int().positive(),
+        stock: z.number().int(),
+        sku: z.string(),
+        height: z.number().int().positive(),
+        width: z.number().int().positive(),
+        weight: z.number().int().positive(),
+        length: z.number().int().positive(),
+        options: z.array(
+          z.object({
+            name: z.string(),
+            value: z.string(),
+          }),
+        ),
+      }),
+    ),
+  }),
 });
 
-export const productQuerySchema = z.object({
+export const ListProductsSchema = z.object({
+  data: z.array(productSchema),
+  pagination: z.object({
+    page: z.number(),
+    limit: z.number(),
+    total: z.number(),
+  }),
+});
+
+export const ListProductsQueriesSchema = z.object({
   search: z.string().optional(),
   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().optional(),
@@ -54,21 +64,7 @@ export const productQuerySchema = z.object({
   sort: z.enum(["ASC", "DESC"]).optional(),
 });
 
-export const productParamsSchema = z.object({
-  slug: z.string(),
-});
-
-export const responseProductsSchema = z.object({
-  data: z.array(productSchema),
-  pagination: z.object({
-    page: z.number(),
-    limit: z.number(),
-    count: z.number(),
-  }),
-});
-
 export type productType = z.infer<typeof productSchema>;
-export type productQueryType = z.infer<typeof productQuerySchema>;
-export type productParamsType = z.infer<typeof productParamsSchema>;
-export type productsResponseType = z.infer<typeof responseProductsSchema>;
-export type productDetailedType = z.infer<typeof productDetailedSchema>
+export type ListProductsQueriesType = z.infer<typeof ListProductsQueriesSchema>;
+export type ListProductsType = z.infer<typeof ListProductsSchema>;
+export type GetProductType = z.infer<typeof getProductSchema>;

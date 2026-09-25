@@ -3,8 +3,8 @@ import type { productDataRaw } from "./product.types.ts";
 export function mapProduct(rows: productDataRaw[]) {
   const product = rows[0];
 
-  if(!product) {
-    return null
+  if (!product) {
+    return null;
   }
 
   const variants = new Map();
@@ -16,15 +16,16 @@ export function mapProduct(rows: productDataRaw[]) {
 
     if (!variant) {
       variant = {
-        id: row.variant_id,
+        variant_id: row.variant_id,
         price: row.price,
         comparison_price: row.comparison_price,
         stock: row.stock,
         sku: row.sku,
         height: row.height,
         width: row.width,
+        length: row.length,
         weight: row.weight,
-        options: []
+        options: [],
       };
 
       variants.set(row.variant_id, variant);
@@ -33,13 +34,13 @@ export function mapProduct(rows: productDataRaw[]) {
     if (row.option_id) {
       variant.options.push({
         name: row.option_name,
-        value: row.option_value
+        value: row.option_value,
       });
     }
   }
 
   return {
-    id: product.product_id,
+    product_id: product.product_id,
     title: product.title,
     slug: product.slug,
     description: product.description,
@@ -47,6 +48,6 @@ export function mapProduct(rows: productDataRaw[]) {
     tags: product.tags,
     metadata: product.metadata,
     category: product.category,
-    variants: [...variants.values()]
+    variants: [...variants.values()],
   };
 }
