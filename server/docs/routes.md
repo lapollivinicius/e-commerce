@@ -39,13 +39,14 @@ list products
 }
 ```
 
-#### GET /products/slug
+#### GET /products/:slug
 
 **no queries**
 
 ```json
 {
   "data": {
+    "product_id": "",
     "title": "",
     "slug": "",
     "description": "",
@@ -55,6 +56,7 @@ list products
     "category": "",
     "variants": [
       {
+        "variant_id": "",
         "price": 0,
         "comparison_price": 0,
         "stock": 0,
