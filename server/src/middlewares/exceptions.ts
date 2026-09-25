@@ -9,7 +9,7 @@ export const exceptionHandler: ErrorRequestHandler = (
   return res.status(400).json({
     success: false,
     error: {
-      code: "EXCEPTION",
+      code: "INTERNAL_SERVER_ERROR",
       message: "an exception occurred",
     },
   });
