@@ -21,6 +21,13 @@ export type productDataRaw = {
   option_value: string;
 };
 
-export interface productParams {
+export type productsDataRaw = {
+  product_id: string;
+  title: string;
   slug: string;
-}
+  tags: string[];
+  brand: string;
+  category: string;
+  price: number;
+  comparison_price: number;
+};

@@ -1,4 +1,4 @@
-import type { productDataRaw } from "./product.types.ts";
+import type { productDataRaw } from "@/modules/product/product.types.js";
 
 export function mapProduct(rows: productDataRaw[]) {
   const product = rows[0];

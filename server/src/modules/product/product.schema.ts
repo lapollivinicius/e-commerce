@@ -1,16 +1,5 @@
 import * as z from "zod";
 
-export const productSchema = z.object({
-  product_id: z.uuid(),
-  title: z.string(),
-  slug: z.string(),
-  tags: z.array(z.string()),
-  brand: z.string(),
-  category: z.string(),
-  price: z.number().int(),
-  comparison_price: z.number().int(),
-});
-
 export const getProductSchema = z.object({
   data: z.object({
     product_id: z.uuid(),
@@ -44,7 +33,18 @@ export const getProductSchema = z.object({
 });
 
 export const ListProductsSchema = z.object({
-  data: z.array(productSchema),
+  data: z.array(
+    z.object({
+      product_id: z.uuid(),
+      title: z.string(),
+      slug: z.string(),
+      tags: z.array(z.string()),
+      brand: z.string(),
+      category: z.string(),
+      price: z.number().int(),
+      comparison_price: z.number().int(),
+    }),
+  ),
   pagination: z.object({
     page: z.number(),
     limit: z.number(),
@@ -52,7 +52,7 @@ export const ListProductsSchema = z.object({
   }),
 });
 
-export const ListProductsQueriesSchema = z.object({
+export const queriesSchema = z.object({
   search: z.string().optional(),
   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().optional(),
@@ -64,7 +64,11 @@ export const ListProductsQueriesSchema = z.object({
   sort: z.enum(["ASC", "DESC"]).optional(),
 });
 
-export type productType = z.infer<typeof productSchema>;
-export type ListProductsQueriesType = z.infer<typeof ListProductsQueriesSchema>;
+export const slugParamSchema = z.object({
+  slug: z.string(),
+});
+
 export type ListProductsType = z.infer<typeof ListProductsSchema>;
 export type GetProductType = z.infer<typeof getProductSchema>;
+export type queriesType = z.infer<typeof queriesSchema>;
+export type slugParamType = z.infer<typeof slugParamSchema>;

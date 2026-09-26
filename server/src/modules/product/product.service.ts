@@ -1,20 +1,25 @@
-import { mapProduct } from "./product.mapper.ts";
-import { findAll, findBySlug } from "./product.repository.js";
+import { mapProduct } from "@/modules/product/product.mapper.js";
+import { findAll, findBySlug } from "@/modules/product/product.repository.js";
 import {
   getProductSchema,
   ListProductsSchema,
-  type ListProductsQueriesType,
+  queriesSchema,
+  slugParamSchema,
   type GetProductType,
   type ListProductsType,
-} from "./product.schema.js";
+  type queriesType,
+  type slugParamType,
+} from "@/modules/product/product.schema.js";
+import { ErrorHandler } from "@/helpers/error.js";
 
 export async function listProducts(
-  query: ListProductsQueriesType,
+  reqQuery: queriesType,
 ): Promise<ListProductsType> {
-  const data = await findAll(query);
+  const queries = queriesSchema.parse(reqQuery);
+  const data = await findAll(queries);
   const pagination = {
-    page: query.page ?? 1,
-    limit: query.limit ?? 10,
+    page: queries.page ?? 1,
+    limit: queries.limit ?? 10,
     total: data.length,
   };
   const response = ListProductsSchema.parse({ data, pagination });
@@ -22,12 +27,13 @@ export async function listProducts(
 }
 
 export async function getProductBySlug(
-  slug: string,
-): Promise<GetProductType | null> {
+  reqParams: slugParamType,
+): Promise<GetProductType> {
+  const { slug } = slugParamSchema.parse(reqParams);
   const rows = await findBySlug(slug);
   const data = mapProduct(rows);
   if (!data) {
-    return null;
+    throw new ErrorHandler("product not found", 404, "PRODUCT_NOT_FOUND");
   }
   const response = getProductSchema.parse({ data: data });
   return response;
