@@ -1,10 +1,56 @@
 # API ROUTES
 
-base URL: /api/v* -> version
+**base URL:** ```/api/v1```
 
-### products
+---
 
-#### GET /products
+### AUTH
+
+#### POST ```/auth/register```
+
+to register an user
+
+**no queries**
+
+```json
+{
+	"message": "User was registed",
+	"success": true,
+	"error": null
+}
+```
+
+#### POST ```/auth/login```
+
+to login app
+
+**no queries**
+
+```json
+{
+	"message": "login successful",
+	"success": true,
+	"error": null
+}
+```
+
+#### POST ```/auth/logout```
+
+to logout app
+
+**no queries**
+
+```json
+{
+	"message": "logout successful",
+	"success": true,
+	"error": null
+}
+```
+---
+### PRODUCTS
+
+#### GET ```/products```
 
 list products
 
@@ -41,7 +87,7 @@ list products
 }
 ```
 
-#### GET /products/:slug
+#### GET ```/products/:slug```
 
 **no queries**
 
@@ -81,9 +127,11 @@ list products
 }
 ```
 
-### categories
+---
 
-#### GET /categories
+### CATEGORIES
+
+#### GET ```/categories```
 
 **Query params**
 - 'limit'
@@ -109,10 +157,9 @@ list products
 }
 ```
 
-#### GET /categories/:slug
+#### GET ```/categories/:slug```
 
 **no queries**
-
 
 ```json
 {
