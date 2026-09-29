@@ -4,12 +4,12 @@ import {
   listProducts,
 } from "@/modules/product/product.service.js";
 import type {
-  queriesType,
+  queryType,
   slugParamType,
 } from "@/modules/product/product.schema.js";
 
 export async function getAllProducts(
-  req: Request<queriesType>,
+  req: Request<queryType>,
   res: Response,
   next: NextFunction,
 ) {

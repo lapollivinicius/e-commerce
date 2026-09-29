@@ -52,7 +52,7 @@ export const ListProductsSchema = z.object({
   }),
 });
 
-export const queriesSchema = z.object({
+export const querySchema = z.object({
   search: z.string().optional(),
   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().optional(),
@@ -70,5 +70,5 @@ export const slugParamSchema = z.object({
 
 export type ListProductsType = z.infer<typeof ListProductsSchema>;
 export type GetProductType = z.infer<typeof getProductSchema>;
-export type queriesType = z.infer<typeof queriesSchema>;
+export type queryType = z.infer<typeof querySchema>;
 export type slugParamType = z.infer<typeof slugParamSchema>;

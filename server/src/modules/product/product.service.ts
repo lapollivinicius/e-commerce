@@ -3,20 +3,23 @@ import { findAll, findBySlug } from "@/modules/product/product.repository.js";
 import {
   getProductSchema,
   ListProductsSchema,
-  queriesSchema,
+  querySchema,
   slugParamSchema,
   type GetProductType,
   type ListProductsType,
-  type queriesType,
+  type queryType,
   type slugParamType,
 } from "@/modules/product/product.schema.js";
 import { ErrorHandler } from "@/helpers/error.js";
 
 export async function listProducts(
-  reqQuery: queriesType,
+  reqQuery: queryType,
 ): Promise<ListProductsType> {
-  const queries = queriesSchema.parse(reqQuery);
+  const queries = querySchema.parse(reqQuery);
   const data = await findAll(queries);
+  if (data.length === 0 || !data) {
+    throw new ErrorHandler("products not found", 404, "RESOURCE_NOT_FOUND");
+  }
   const pagination = {
     page: queries.page ?? 1,
     limit: queries.limit ?? 10,
@@ -33,7 +36,7 @@ export async function getProductBySlug(
   const rows = await findBySlug(slug);
   const data = mapProduct(rows);
   if (!data) {
-    throw new ErrorHandler("product not found", 404, "PRODUCT_NOT_FOUND");
+    throw new ErrorHandler("product not found", 404, "RESOURCE_NOT_FOUND");
   }
   const response = getProductSchema.parse({ data: data });
   return response;

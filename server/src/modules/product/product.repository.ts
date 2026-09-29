@@ -1,12 +1,12 @@
 import { database } from "@/database/pool.js";
-import type { queriesType } from "@/modules/product/product.schema.js";
+import type { queryType } from "@/modules/product/product.schema.js";
 import type {
   productDataRaw,
   productsDataRaw,
 } from "@/modules/product/product.types.js";
 
 // TODO: apply query filters to the SQL query based on the provided query parameters
-export async function findAll(query: queriesType): Promise<productsDataRaw[]> {
+export async function findAll(query: queryType): Promise<productsDataRaw[]> {
   const { rows } = await database.query(
     `
     SELECT
