@@ -1,8 +1,19 @@
 import { ErrorHandler } from "@/helpers/error.js";
-import type { ErrorRequestHandler } from "express";
+import type {
+  ErrorRequestHandler,
+  NextFunction,
+  Request,
+  Response,
+} from "express";
 import { ZodError } from "zod";
 
-export const requestError: ErrorRequestHandler = (err, req, res, next) => {
+export const requestError: ErrorRequestHandler = (
+  err: ErrorRequestHandler,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  console.log(err);
   if (err instanceof ErrorHandler) {
     return res.status(err.statusCode).json({
       success: false,
@@ -14,12 +25,11 @@ export const requestError: ErrorRequestHandler = (err, req, res, next) => {
   }
 
   if (err instanceof ZodError) {
-    console.log(err)
     return res.status(400).json({
       success: false,
       error: {
         code: "INVALID__DATA",
-        message: err.issues[0]!.message
+        message: err.issues[0]!.message,
       },
     });
   }
