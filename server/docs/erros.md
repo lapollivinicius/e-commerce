@@ -10,4 +10,5 @@
 | 401  |  `false`  | `UNAUTHORIZED`           | authentication is required                         |
 | 403  |  `false`  | `FORBIDDEN`              | authenticated user does not have permission        |
 | 409  |  `false`  | `DATA_ALREADY_EXISTS`    | a data with the same identifier already exists     |
+| 409  |  `false`  | `ALREADY_AUTHENTICATED`  | user already authenticated                         |
 | 500  |  `false`  | `INTERNAL_SERVER_ERROR`  | server error occurred                              |
