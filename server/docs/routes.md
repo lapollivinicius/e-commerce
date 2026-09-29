@@ -35,7 +35,9 @@ list products
     "limit": 0,
     "total": 0,
     "sort": ""
-  }
+  },
+  "success": true,
+  "error": null,
 }
 ```
 
@@ -73,6 +75,57 @@ list products
         ]
       }
     ]
-  }
+  },
+  "success": true,
+  "error": null,
+}
+```
+
+### categories
+
+#### GET /categories
+
+**Query params**
+- 'limit'
+- 'featured'
+- 'sort'
+
+```json
+{
+  "data": [
+    {
+      "category": "",
+      "thumbnail": "",
+      "slug": ""
+    }
+  ],
+  "pagination": {
+    "limit": 0,
+    "featured" false,
+    "sort": ""
+  },
+  "success": true,
+  "error": null,
+}
+```
+
+#### GET /categories/:slug
+
+**no queries**
+
+
+```json
+{
+  "data": [
+    {
+      "category_id": "",
+      "category": "",
+      "slug": "",
+      "thumbnail": "",
+      "description": ""
+    }
+  ],
+  "success": true,
+  "error": null
 }
 ```
