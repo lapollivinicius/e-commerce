@@ -1,6 +1,9 @@
 CREATE TABLE IF NOT EXISTS categories (
     category_id UUID PRIMARY KEY,
     category TEXT NOT NULL,
+    slug TEXT NOT NULL UNIQUE,
+    thumbnail TEXT,
+    featured BOOLEAN NOT NULL DEFAULT TRUE,
     description TEXT
 );
 

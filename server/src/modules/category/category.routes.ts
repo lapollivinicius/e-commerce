@@ -1,9 +1,9 @@
-import express, { type Request, type Response } from "express";
+import express from "express";
+import { getAllCategories, getCategory } from "@/modules/category/category.controller.js";
 
 const router = express.Router();
 
-router.get("/category", (req: Request, res: Response) => {
-  res.json({ msg: "category" });
-});
+router.get("/categories", getAllCategories);
+router.get("/categories/:slug", getCategory);
 
 export default router;
