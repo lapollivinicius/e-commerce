@@ -1,5 +1,5 @@
 import { database } from "@/database/pool.js";
-import type { userType } from "./user.schema.ts";
+import type { userIdType, userType } from "@/modules/user/user.schema.js";
 
 export async function findUserByEmail(email: string): Promise<userType> {
   const { rows } = await database.query(
@@ -11,6 +11,18 @@ export async function findUserByEmail(email: string): Promise<userType> {
     [email],
   );
   return rows[0];
+}
+
+export async function findUserById(user_id: userIdType): Promise<userType> {
+  const { rows } = await database.query(
+    `
+    SELECT * FROM users
+    WHERE user_id = $1
+    LIMIT 1
+    `,
+    [user_id]
+  )
+  return rows[0]
 }
 
 export async function createUser({

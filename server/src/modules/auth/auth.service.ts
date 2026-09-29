@@ -7,7 +7,7 @@ import {
 import {
   createUser,
   findUserByEmail,
-} from "@/modules/users/user.repository.js";
+} from "@/modules/user/user.repository.js";
 import { ErrorHandler } from "@/helpers/error.js";
 import argon2 from "argon2";
 import { randomUUID } from "node:crypto";
@@ -16,7 +16,7 @@ export async function registerUser(reqBody: registerUserType) {
   const { email, password } = registerUserSchema.parse(reqBody);
   const user = await findUserByEmail(email);
 
-  if (!user) {
+  if (user) {
     throw new ErrorHandler("User Already registed", 409, "DATA_ALREADY_EXISTS");
   }
 

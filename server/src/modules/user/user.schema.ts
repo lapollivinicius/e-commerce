@@ -9,4 +9,7 @@ export const userSchema = z.object({
   update_at: z.date().optional()
 })
 
+export const userIdSchema = z.uuid()
+
 export type userType = z.infer<typeof userSchema>
+export type userIdType = z.infer<typeof userIdSchema>

@@ -17,15 +17,17 @@ export async function register(
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const user_id = await authenticateUser(req.body);
+
     req.session.regenerate((err) => {
       if (err) return next(err);
       req.session.user_id = user_id;
-      return res.send({
+      return res.status(200).send({
         message: "login successful",
         success: true,
         error: null,
       });
     });
+
   } catch (err) {
     next(err);
   }
@@ -36,13 +38,11 @@ export async function logout(req: Request, res: Response, next: NextFunction) {
     req.session.destroy((err) => {
       if (err) return next(err);
       res.clearCookie("connect.sid");
-      return res.status(200).send({message: "logout successful", success: true, error: null});
+      return res
+        .status(200)
+        .send({ message: "logout successful", success: true, error: null });
     });
   } catch (err) {
     next(err);
   }
-}
-
-export async function reset(req: Request, res: Response, next: NextFunction) {
-  // reset-password
 }
