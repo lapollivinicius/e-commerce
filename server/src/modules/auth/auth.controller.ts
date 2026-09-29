@@ -1,21 +1,46 @@
 import type { Request, Response, NextFunction } from "express";
-import { registerUser } from "./auth.service.ts";
+import { authenticateUser, registerUser } from "@/modules/auth/auth.service.js";
 
-export async function signUp(req: Request, res: Response, next: NextFunction) {
+export async function register(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
-    const response = await registerUser(req.body)
-    res.send({...response, success: true, error: null})
-  } catch(err) {
-    next(err)
+    const response = await registerUser(req.body);
+    res.send({ ...response, success: true, error: null });
+  } catch (err) {
+    next(err);
   }
 }
 
 export async function login(req: Request, res: Response, next: NextFunction) {
-  // login
+  try {
+    const user_id = await authenticateUser(req.body);
+    req.session.regenerate((err) => {
+      if (err) return next(err);
+      req.session.user_id = user_id;
+      return res.send({
+        message: "login successful",
+        success: true,
+        error: null,
+      });
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
 export async function logout(req: Request, res: Response, next: NextFunction) {
-  // logout
+  try {
+    req.session.destroy((err) => {
+      if (err) return next(err);
+      res.clearCookie("connect.sid");
+      return res.status(200).send({message: "logout successful", success: true, error: null});
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
 export async function reset(req: Request, res: Response, next: NextFunction) {

@@ -20,4 +20,10 @@ export const registerUserSchema = z
     message: "Passwords do not match",
   });
 
+export const authenticateUserSchema = z.object({
+  email: z.email(),
+  password: passwordSchema
+})
+
 export type registerUserType = z.infer<typeof registerUserSchema>;
+export type authenticateUserType = z.infer<typeof authenticateUserSchema>
