@@ -7,6 +7,7 @@ const PgSession = pgSession(session);
 export const sessionConfig: session.SessionOptions = {
   store: new PgSession({
     pool: database,
+    tableName: "session",
   }),
   secret: process.env.SESSION_SECRET!,
   resave: false,
