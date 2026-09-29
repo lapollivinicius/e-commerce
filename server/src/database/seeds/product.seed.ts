@@ -16,7 +16,7 @@ async function seedProduct() {
       metadata
     ) VALUES (
       $1,
-      '',
+      'ff23ea27-740a-43ab-91dd-420b8f2f6013',
       'mega t-shirt black and white',
       'shirt-black-white',
       'lorem ipsum ...',
@@ -40,11 +40,11 @@ async function seedProduct() {
       weight
     ) VALUES (
       $1,
-      $2, 
+      '8bee07bc-daf2-43a8-8297-d7dff88a4277', 
       9990,
       8990,
       10,
-      'SHIRT-123',
+      $2,
       20,
       300,
       300,
@@ -61,8 +61,8 @@ async function seedProduct() {
     ) VALUES (
       $1,
       $2,
-      'size',
-      'medium'
+      $3,
+      $4
     );
   `;
   const option2 = `
@@ -74,8 +74,8 @@ async function seedProduct() {
     ) VALUES (
       $1,
       $2,
-      'color',
-      'white'
+      $3,
+      $4
     );
   `;
 
@@ -84,9 +84,9 @@ async function seedProduct() {
     ["offer", "10% off"],
     { height: 100.0 },
   ]);
-  await database.query(variant, [variant_id, product_id]);
-  await database.query(option1, [randomUUID(), variant_id]);
-  await database.query(option2, [randomUUID(), variant_id]);
+  await database.query(variant, [variant_id, "SHIRT-WHITE-LARGE"]);
+  await database.query(option1, [randomUUID(), variant_id, "color", "white"]);
+  await database.query(option2, [randomUUID(), variant_id, "size", "large"]);
 }
 
 seedProduct();
