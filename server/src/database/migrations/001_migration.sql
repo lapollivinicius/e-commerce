@@ -68,19 +68,20 @@ CREATE TABLE IF NOT EXISTS users (
     update_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS addresses (
-    address_id UUID PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS informations (
+    information_id UUID PRIMARY KEY,
     user_id UUID NOT NULL,
-    name TEXT,
-    recipient TEXT NOT NULL,
-    street TEXT NOT NULL,
-    number TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    document TEXT NOT NULL,
+    street TEXT,
+    number TEXT,
     complement TEXT,
-    neighborhood TEXT NOT NULL,
-    city TEXT NOT NULL,
-    state TEXT NOT NULL,
-    postal_code TEXT NOT NULL,
-    country TEXT NOT NULL,
+    neighborhood TEXT,
+    city TEXT,
+    state TEXT,
+    postal_code TEXT,
+    country TEXT,
     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 );
 
