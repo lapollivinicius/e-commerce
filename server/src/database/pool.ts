@@ -1,10 +1,13 @@
+import 'dotenv/config'
+import { env } from "@/helpers/env.js";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Pool } from "pg";
 
+const databaseURL = env('DATABASE_URL')
 export const database = new Pool({
-    connectionString: process.env.DATABASE_URL!
+    connectionString: databaseURL
 })
 
 export async function setupDatabase(): Promise<void> {
