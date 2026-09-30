@@ -4,7 +4,7 @@ export const logger = {
   },
 
   route(message: string, data?: unknown) {
-    console.log(`\x1b[33m[ROUTE] \x1b[36m${message}`, data ?? "", "\x1b[0m");
+    console.log(`\x1b[33m[ROUTE]\x1b[36m ${message}`, data ?? "", "\x1b[0m");
   },
 
   warn(message: string, data?: unknown) {
