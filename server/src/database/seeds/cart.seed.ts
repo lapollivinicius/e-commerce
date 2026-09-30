@@ -18,9 +18,9 @@ async function seedCart() {
     VALUES ($1, $2, $3, $4)
   `
 
-  await database.query(cart, [cart_id, "894a3090-88f5-4d8b-8a08-8f1da49a9855"])
-  await database.query(cartItem1, [randomUUID(), cart_id, "40131190-d665-4924-8c11-f8cb424bf108", 1])
-  await database.query(cartItem2, [randomUUID(), cart_id, "bf7e4d4b-74cd-4180-b124-6a0b5ec653b9", 1])
+  await database.query(cart, [cart_id, "76ed217d-4c9f-4cc5-b681-1101e82350fe"])
+  await database.query(cartItem1, [randomUUID(), cart_id, "9317f288-9c90-4337-b533-d7f43883e22a", 1])
+  await database.query(cartItem2, [randomUUID(), cart_id, "60d7f2e3-ebcb-42d8-a796-53e6f40d0ee6", 1])
 }
 
 seedCart()

@@ -4,27 +4,27 @@ import { randomUUID } from "node:crypto";
 async function seedProduct() {
   const product_id = randomUUID();
   const variant_id = randomUUID();
-  const product = `
-    INSERT INTO products (
-      product_id,
-      category_id,
-      title,
-      slug,
-      description,
-      brand,
-      tags,
-      metadata
-    ) VALUES (
-      $1,
-      'ff23ea27-740a-43ab-91dd-420b8f2f6013',
-      'mega t-shirt black and white',
-      'shirt-black-white',
-      'lorem ipsum ...',
-      'MEGA',
-      $2,
-      $3
-    );
-  `;
+  // const product = `
+  //   INSERT INTO products (
+  //     product_id,
+  //     category_id,
+  //     title,
+  //     slug,
+  //     description,
+  //     brand,
+  //     tags,
+  //     metadata
+  //   ) VALUES (
+  //     $1,
+  //     'baf5218c-e98f-4d60-b48e-192028b42440',
+  //     'mega t-shirt black and white',
+  //     'shirt-black-white',
+  //     'lorem ipsum ...',
+  //     'MEGA',
+  //     $2,
+  //     $3
+  //   );
+  // `;
 
   const variant = `
     INSERT INTO variants (
@@ -40,7 +40,7 @@ async function seedProduct() {
       weight
     ) VALUES (
       $1,
-      '8bee07bc-daf2-43a8-8297-d7dff88a4277', 
+      '049e6fe7-25c9-4692-836c-f10d9972bac3', 
       9990,
       8990,
       10,
@@ -79,14 +79,14 @@ async function seedProduct() {
     );
   `;
 
-  await database.query(product, [
-    product_id,
-    ["offer", "10% off"],
-    { height: 100.0 },
-  ]);
+  // await database.query(product, [
+  //   product_id,
+  //   ["offer", "10% off"],
+  //   { height: 100.0 },
+  // ]);
   await database.query(variant, [variant_id, "SHIRT-WHITE-LARGE"]);
   await database.query(option1, [randomUUID(), variant_id, "color", "white"]);
-  await database.query(option2, [randomUUID(), variant_id, "size", "large"]);
+  await database.query(option2, [randomUUID(), variant_id, "size", "medium"]);
 }
 
 seedProduct();

@@ -3,11 +3,13 @@ import { sessionConfig } from "@/config/session.config.js";
 import { requestError } from "@/middlewares/error.middleware.js";
 import session from "express-session";
 import router from "@/routes/index.js";
+import { requestLogger } from "./middlewares/logger.middleware.ts";
 
 const app: Express = express();
 
 app.use(express.json({ limit: "1mb" }));
 app.use(session(sessionConfig));
+app.use(requestLogger);
 app.use(router);
 app.use(requestError);
 
