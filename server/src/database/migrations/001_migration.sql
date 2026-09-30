@@ -105,13 +105,13 @@ CREATE TABLE IF NOT EXISTS cart_items (
 CREATE TABLE IF NOT EXISTS orders (
     order_id UUID PRIMARY KEY,
     user_id UUID NOT NULL,
-    address_id UUID NOT NULL,
+    information_id UUID NOT NULL,
     amount INTEGER NOT NULL,
     status TEXT NOT NULL,
     create_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     update_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
-    FOREIGN KEY (address_id) REFERENCES addresses (address_id)
+    FOREIGN KEY (information_id) REFERENCES informations (information_id)
 );
 
 CREATE TABLE IF NOT EXISTS order_items (
