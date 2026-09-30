@@ -47,34 +47,6 @@ to logout app
 	"error": null
 }
 ```
----
-
-### CART
-
-#### GET ```/carts```
-
-**no queries**
-
-to get cart items by user
-
-```json
-{
-	"data": [
-		{
-			"variant_id": "",
-			"title": "",
-			"slug": "",
-			"brand": "",
-			"price": 0,
-			"comparison_price": 0,
-			"quantity": 0
-		}
-	],
-	"success": true,
-	"error": null
-}
-```
-
 
 ---
 
