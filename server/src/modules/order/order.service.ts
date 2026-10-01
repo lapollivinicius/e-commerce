@@ -7,18 +7,19 @@ import {
   type orderIdType,
   type queryType,
 } from "@/modules/order/order.schema.js";
-import { findAll, findById } from "./order.repository.ts";
-import { mapOrderDetails, mapOrders } from "./order.mapper.ts";
+import { findAll, findById } from "@/modules/order/order.repository.js";
+import { mapOrderDetails, mapOrders } from "@/modules/order/order.mapper.js";
 import { ErrorHandler } from "@/helpers/error.js";
 
 export async function listOrders(user_id: userIdType, reqQuery: queryType) {
   const userId = userIdSchema.parse(user_id);
   const query = querySchema.parse(reqQuery);
-
   const orders = await findAll(userId, query);
+
   if (orders.length === 0) {
-    throw new ErrorHandler("Orders not found", 404, "RESOURCE NOT FOUND");
+    throw new ErrorHandler("Orders not found", 404, "RESOURCE_NOT_FOUND");
   }
+
   const data = mapOrders(orders);
   const pagination = {
     page: query.page ?? 1,
@@ -32,11 +33,13 @@ export async function listOrders(user_id: userIdType, reqQuery: queryType) {
 export async function getOrderById(user_id: userIdType, order_id: orderIdType) {
   const userId = userIdSchema.parse(user_id);
   const orderId = orderIdSchema.parse(order_id);
-  const order = await findById(userId, orderId)
+  const order = await findById(userId, orderId);
+
   if (order.length === 0 || !order) {
-    throw new ErrorHandler("Orders not found", 404, "RESOURCE NOT FOUND");
+    throw new ErrorHandler("Orders not found", 404, "RESOURCE_NOT_FOUND");
   }
-  const data = mapOrderDetails(order)
-  const response = orderDetailsSchema.parse(data)
-  return { data: response }
+  
+  const data = mapOrderDetails(order);
+  const response = orderDetailsSchema.parse(data);
+  return { data: response };
 }

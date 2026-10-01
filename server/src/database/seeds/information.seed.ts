@@ -35,6 +35,7 @@ async function seedInformation() {
       'none'
     );
   `;
+  
   await database.query(information, [randomUUID(), "8f98f4a5-67e7-46e0-b8dc-ee580682d3d5"])
 }
 seedInformation();

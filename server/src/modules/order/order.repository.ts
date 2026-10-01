@@ -1,7 +1,7 @@
 import { database } from "@/database/pool.js";
 import type { userIdType } from "@/modules/user/user.schema.js";
 import type { orderIdType, queryType } from "@/modules/order/order.schema.js";
-import type { orderDetailsRaw, orderRaw } from "./order.types.ts";
+import type { orderDetailsRaw, orderRaw } from "@/modules/order/order.types.js";
 
 export async function findAll(userId: userIdType, query: queryType): Promise<orderRaw[]> {
   const { rows } = await database.query(
@@ -24,12 +24,16 @@ export async function findAll(userId: userIdType, query: queryType): Promise<ord
       vo.value
 
     FROM orders o
+    
     INNER JOIN order_items oi
       ON oi.order_id = o.order_id
+
     LEFT JOIN products p
       ON oi.product_id = p.product_id
+
     LEFT JOIN options vo
       ON oi.variant_id = vo.variant_id
+
     WHERE user_id = $1
     `,
     [userId]

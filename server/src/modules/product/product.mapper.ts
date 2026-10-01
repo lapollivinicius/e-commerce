@@ -3,15 +3,12 @@ import type { productDataRaw } from "@/modules/product/product.types.js";
 export function mapProduct(rows: productDataRaw[]) {
   const product = rows[0];
 
-  if (!product) {
-    return null;
-  }
+  if (!product) return null;
 
   const variants = new Map();
 
   for (const row of rows) {
     if (!row.variant_id) continue;
-
     let variant = variants.get(row.variant_id);
 
     if (!variant) {
@@ -38,7 +35,7 @@ export function mapProduct(rows: productDataRaw[]) {
       });
     }
   }
-
+  
   return {
     product_id: product.product_id,
     title: product.title,

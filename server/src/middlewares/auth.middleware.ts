@@ -9,5 +9,6 @@ export const authMiddleware = (
   if (!req.session.user_id) {
     throw new ErrorHandler("Authentication required", 401, "UNAUTHORIZED");
   }
+  
   next();
 };

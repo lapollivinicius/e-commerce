@@ -1,5 +1,5 @@
-import type { orderType } from "./order.schema.ts";
-import type { orderDetailsRaw, orderRaw } from "./order.types.ts";
+import type { orderType } from "@/modules/order/order.schema.js";
+import type { orderDetailsRaw, orderRaw } from "@/modules/order/order.types.js";
 
 export function mapOrders(rows: orderRaw[]): orderType[] {
   const ordersMap = new Map<string, orderType>();
@@ -19,9 +19,7 @@ export function mapOrders(rows: orderRaw[]): orderType[] {
       ordersMap.set(row.order_id, order);
     }
 
-    let item = order.items.find(
-      (item) => item.variant_id === row.variant_id,
-    );
+    let item = order.items.find((item) => item.variant_id === row.variant_id);
 
     if (!item) {
       item = {
@@ -80,7 +78,7 @@ export function mapOrderDetails(rows: orderDetailsRaw[]) {
       });
     }
   }
-
+  
   return {
     order_id: first.order_id,
     amount: first.amount,

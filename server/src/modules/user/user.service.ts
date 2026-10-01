@@ -9,6 +9,6 @@ export async function getUserById(user_id: userIdType) {
   if(!user) {
     throw new ErrorHandler("User not found", 404, "RESOURCE_NOT_FOUND")
   }
-
+  
   return { data: user};
 }

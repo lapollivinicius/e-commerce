@@ -9,6 +9,7 @@ export const sessionConfig: session.SessionOptions = {
     pool: database,
     tableName: "session",
   }),
+  
   secret: process.env.SESSION_SECRET!,
   resave: false,
   saveUninitialized: false,

@@ -24,7 +24,6 @@ async function seedOrder() {
       NOW()
     );
   `;
-
   const order_item = `
     INSERT INTO order_items (
       order_item_id,
@@ -49,7 +48,6 @@ async function seedOrder() {
     "5595b485-a84a-4a58-83e2-7460f1d3a59a",
     "8ea3ebd8-6e1c-4d31-bd6f-210f980467ea",
   ]);
-  
   await database.query(order_item, [
     randomUUID(),
     order_id,
@@ -57,4 +55,5 @@ async function seedOrder() {
     "af5d01bb-cc33-4d43-89fd-453725636991",
   ]);
 }
+
 seedOrder();

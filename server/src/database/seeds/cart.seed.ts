@@ -3,7 +3,6 @@ import { database } from "@/database/pool.js";
 import { randomUUID } from "node:crypto";
 
 async function seedCart() {
-
   const cart_id = randomUUID();
   const cart = `
     INSERT INTO carts (cart_id, user_id)

@@ -3,7 +3,6 @@ import { database } from "@/database/pool.js";
 import { randomUUID } from "node:crypto";
 
 async function seedCategories() {
-  console.log(process.env.DATABASE_URL)
   const category1 = `
     INSERT INTO categories (
       category_id,
@@ -49,6 +48,7 @@ async function seedCategories() {
       'caps are nice'
     );
   `;
+
   await database.query(category1, [randomUUID()]);
   await database.query(category2, [randomUUID()]);
   await database.query(category3, [randomUUID()]);

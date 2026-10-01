@@ -18,7 +18,6 @@ export async function register(
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const user_id = await authenticateUser(req.body);
-
     req.session.regenerate((err) => {
       if (err) return next(err);
       req.session.user_id = user_id;
@@ -59,4 +58,3 @@ export async function getAuthUser(
     next(err);
   }
 }
-

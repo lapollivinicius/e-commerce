@@ -17,9 +17,11 @@ export async function listProducts(
 ): Promise<ListProductsType> {
   const queries = querySchema.parse(reqQuery);
   const data = await findAll(queries);
+
   if (data.length === 0 || !data) {
     throw new ErrorHandler("products not found", 404, "RESOURCE_NOT_FOUND");
   }
+
   const pagination = {
     page: queries.page ?? 1,
     limit: queries.limit ?? 10,
@@ -35,9 +37,11 @@ export async function getProductBySlug(
   const { slug } = slugParamSchema.parse(reqParams);
   const rows = await findBySlug(slug);
   const data = mapProduct(rows);
+
   if (!data) {
     throw new ErrorHandler("product not found", 404, "RESOURCE_NOT_FOUND");
   }
+  
   const response = getProductSchema.parse({ data: data });
   return response;
 }

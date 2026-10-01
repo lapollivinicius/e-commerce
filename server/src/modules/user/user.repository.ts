@@ -20,9 +20,9 @@ export async function findUserById(user_id: userIdType): Promise<userType> {
     WHERE user_id = $1
     LIMIT 1
     `,
-    [user_id]
-  )
-  return rows[0]
+    [user_id],
+  );
+  return rows[0];
 }
 
 export async function createUser({

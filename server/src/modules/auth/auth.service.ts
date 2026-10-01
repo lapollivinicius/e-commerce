@@ -47,6 +47,6 @@ export async function authenticateUser(reqBody: authenticateUserType) {
   if (!checkPassword) {
     throw new ErrorHandler("login unsuccessful", 401, "UNAUTHORIZED");
   }
-
+  
   return user.user_id;
 }

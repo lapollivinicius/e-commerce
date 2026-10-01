@@ -27,7 +27,6 @@ async function seedProduct() {
       $3
     );
   `;
-
   const variant = `
     INSERT INTO variants (
       variant_id,
@@ -53,7 +52,6 @@ async function seedProduct() {
       500
     );
   `;
-
   const option1 = `
     INSERT INTO options (
       option_id,

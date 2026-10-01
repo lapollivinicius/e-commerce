@@ -5,9 +5,8 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Pool } from "pg";
 
-const databaseURL = env('DATABASE_URL')
 export const database = new Pool({
-    connectionString: databaseURL
+    connectionString: env('DATABASE_URL')
 })
 
 export async function setupDatabase(): Promise<void> {
