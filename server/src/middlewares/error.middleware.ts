@@ -15,7 +15,7 @@ export const requestError: ErrorRequestHandler = (
   next: NextFunction,
 ) => {
   if (err instanceof ErrorHandler) {
-    logger.error(err.message)
+    logger.error(err.message);
     return res.status(err.statusCode).json({
       success: false,
       error: {
@@ -26,16 +26,20 @@ export const requestError: ErrorRequestHandler = (
   }
 
   if (err instanceof ZodError) {
-    logger.error(err.issues[0]!.message)
+    logger.error(
+      err.issues[0]!.message + " FIELD: [" + err.issues[0]!.path + "]",
+    );
     return res.status(400).json({
       success: false,
       error: {
         code: "INVALID__DATA",
-        message: err.issues[0]!.message,
+        message:
+          err.issues[0]!.message + " FIELD: [" + err.issues[0]!.path + "]",
       },
     });
   }
-  logger.error("an exception occurred")
+  console.log(err);
+  logger.error("an exception occurred");
   return res.status(400).json({
     success: false,
     error: {
