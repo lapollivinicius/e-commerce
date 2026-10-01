@@ -3,28 +3,30 @@ import { randomUUID } from "node:crypto";
 
 async function seedProduct() {
   const product_id = randomUUID();
-  const variant_id = randomUUID();
-  // const product = `
-  //   INSERT INTO products (
-  //     product_id,
-  //     category_id,
-  //     title,
-  //     slug,
-  //     description,
-  //     brand,
-  //     tags,
-  //     metadata
-  //   ) VALUES (
-  //     $1,
-  //     'baf5218c-e98f-4d60-b48e-192028b42440',
-  //     'mega t-shirt black and white',
-  //     'shirt-black-white',
-  //     'lorem ipsum ...',
-  //     'MEGA',
-  //     $2,
-  //     $3
-  //   );
-  // `;
+  const variant_id1 = randomUUID();
+  const variant_id2 = randomUUID();
+  const variant_id3 = randomUUID();
+  const product = `
+    INSERT INTO products (
+      product_id,
+      category_id,
+      title,
+      slug,
+      description,
+      brand,
+      tags,
+      metadata
+    ) VALUES (
+      $1,
+      '7dc28741-2f1f-4f1a-9d40-cfc37386dcfa',
+      'mega t-shirt black and white',
+      'shirt-black-white',
+      'lorem ipsum ...',
+      'MEGA',
+      $2,
+      $3
+    );
+  `;
 
   const variant = `
     INSERT INTO variants (
@@ -40,11 +42,11 @@ async function seedProduct() {
       weight
     ) VALUES (
       $1,
-      '049e6fe7-25c9-4692-836c-f10d9972bac3', 
+      $2, 
       9990,
       8990,
       10,
-      $2,
+      $3,
       20,
       300,
       300,
@@ -79,14 +81,23 @@ async function seedProduct() {
     );
   `;
 
-  // await database.query(product, [
-  //   product_id,
-  //   ["offer", "10% off"],
-  //   { height: 100.0 },
-  // ]);
-  await database.query(variant, [variant_id, "SHIRT-WHITE-LARGE"]);
-  await database.query(option1, [randomUUID(), variant_id, "color", "white"]);
-  await database.query(option2, [randomUUID(), variant_id, "size", "medium"]);
+  await database.query(product, [
+    product_id,
+    ["offer", "10% off"],
+    { height: 100.0 },
+  ]);
+
+  await database.query(variant, [variant_id1, product_id, "SHIRT-WHITE-SMALL"]);
+  await database.query(option1, [randomUUID(), variant_id1, "color", "white"]);
+  await database.query(option2, [randomUUID(), variant_id1, "size", "small"]);
+
+  await database.query(variant, [variant_id2, product_id, "SHIRT-WHITE-MEDIUM"]);
+  await database.query(option1, [randomUUID(), variant_id2, "color", "white"]);
+  await database.query(option2, [randomUUID(), variant_id2, "size", "medium"]);
+
+  await database.query(variant, [variant_id3, product_id, "SHIRT-WHITE-LARGE"]);
+  await database.query(option1, [randomUUID(), variant_id3, "color", "white"]);
+  await database.query(option2, [randomUUID(), variant_id3, "size", "large"]);
 }
 
 seedProduct();
