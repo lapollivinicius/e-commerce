@@ -63,13 +63,37 @@ to logout app
 
 **no queries**
 
-_NO BODY_
+_RESPONSE_
 
 ```json
 {
   "message": "logout successful",
   "success": true,
   "error": null
+}
+```
+
+### GET ```/auth/me```
+
+to get user data 
+
+**no queries**
+
+_RESPONSE_
+
+```json
+{
+	"data": {
+		"user_id": "",
+		"email": "",
+		"password": "",
+		"is_admin": false,
+		"is_active": true,
+		"create_at": "",
+		"update_at": ""
+	},
+	"success": true,
+	"error": null
 }
 ```
 
