@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS images (
     product_id UUID NOT NULL,
     url TEXT NOT NULL,
     alt TEXT,
+    is_thumbnail BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE
 );
 
