@@ -195,7 +195,6 @@ to get all categories
 **Query params**
 
 - 'limit'
-- 'featured'
 - 'sort'
 
 _RESPONSE_

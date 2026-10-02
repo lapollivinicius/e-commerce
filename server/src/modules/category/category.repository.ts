@@ -5,10 +5,16 @@ import type {
 } from "@/modules/category/category.schema.js";
 
 export async function findAll(query: queryType) {
+  const { sort = 'ASC', limit = 10 } = query
+  const order = sort === 'DESC' ? 'DESC' : 'ASC'
   const { rows } = await database.query(
     `
-    SELECT category, slug, thumbnail FROM categories;
+    SELECT category, slug, thumbnail 
+    FROM categories
+    ORDER by category ${order}
+    LIMIT $1;
     `,
+    [limit]
   );
   return rows;
 }

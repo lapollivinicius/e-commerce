@@ -20,10 +20,6 @@ export const categoriesSchema = z.array(
 
 export const querySchema = z.object({
   limit: z.coerce.number().int().positive().optional(),
-  featured: z
-    .enum(["true", "false"])
-    .transform((value) => value === "true")
-    .optional(),
   sort: z.enum(["ASC", "DESC"]).optional(),
 });
 
