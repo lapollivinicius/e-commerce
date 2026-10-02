@@ -46,11 +46,15 @@ export async function findAll(query: queryType): Promise<productsDataRaw[]> {
         p.brand,
         c.category,
         v.price,
-        v.comparison_price
+        v.comparison_price,
+        i.url AS image_url
       FROM products p
 
       INNER JOIN categories c
         ON c.category_id = p.category_id
+
+      INNER JOIN images i
+        ON i.product_id = p.product_id AND i.is_thumbnail = true
 
       INNER JOIN LATERAL (
         SELECT
@@ -86,18 +90,17 @@ export async function findBySlug(slug: string): Promise<productDataRaw[]> {
       p.tags,
       p.brand,
       p.metadata,
-
       c.category,
+
+      i.url AS image_url,
+      i.alt AS image_alt,
+      i.is_thumbnail,
 
       v.variant_id,
       v.price,
       v.comparison_price,
       v.stock,
       v.sku,
-      v.height,
-      v.width,
-      v.length,
-      v.weight,
 
       o.option_id,
       o.name AS option_name,
@@ -107,6 +110,9 @@ export async function findBySlug(slug: string): Promise<productDataRaw[]> {
 
     INNER JOIN categories c
       ON c.category_id = p.category_id
+
+    INNER JOIN images i
+      ON i.product_id = p.product_id
 
     LEFT JOIN variants v
       ON v.product_id = p.product_id

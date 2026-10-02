@@ -3,22 +3,24 @@ export type productDataRaw = {
   title: string;
   slug: string;
   description: string;
-  brand: string;
   tags: string[];
-  metadata: object;
+  brand: string;
+  metadata: Record<string, unknown>;
   category: string;
-  variant_id: string;
-  price: number;
-  comparison_price: number;
-  stock: number;
-  sku: string;
-  height: string;
-  width: string;
-  length: string;
-  weight: string;
-  option_id: string;
-  option_name: string;
-  option_value: string;
+
+  image_url: string;
+  image_alt: string | null;
+  is_thumbnail: boolean;
+
+  variant_id: string | null;
+  price: number | null;
+  comparison_price: number | null;
+  stock: number | null;
+  sku: string | null;
+
+  option_id: string | null;
+  option_name: string | null;
+  option_value: string | null;
 };
 
 export type productsDataRaw = {

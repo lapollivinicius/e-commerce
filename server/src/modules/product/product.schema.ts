@@ -10,6 +10,11 @@ export const getProductSchema = z.object({
     brand: z.string(),
     metadata: z.json(),
     category: z.string(),
+    images: z.array(z.object({
+      url: z.url(),
+      alt: z.string(),
+      is_thumbnail: z.boolean()
+    })),
     variants: z.array(
       z.object({
         variant_id: z.uuid(),
@@ -17,10 +22,6 @@ export const getProductSchema = z.object({
         comparison_price: z.number().int().positive(),
         stock: z.number().int(),
         sku: z.string(),
-        height: z.number().int().positive(),
-        width: z.number().int().positive(),
-        weight: z.number().int().positive(),
-        length: z.number().int().positive(),
         options: z.array(
           z.object({
             name: z.string(),
@@ -43,6 +44,7 @@ export const ListProductsSchema = z.object({
       category: z.string(),
       price: z.number().int(),
       comparison_price: z.number().int(),
+      image_url: z.url() 
     }),
   ),
   pagination: z.object({

@@ -35,13 +35,14 @@ export async function getProductBySlug(
   reqParams: slugParamType,
 ): Promise<GetProductType> {
   const { slug } = slugParamSchema.parse(reqParams);
-  const rows = await findBySlug(slug);
-  const data = mapProduct(rows);
+  const data = await findBySlug(slug);
+  console.log(data)
+  const productMapped = mapProduct(data);
 
-  if (!data) {
+  if (!productMapped) {
     throw new ErrorHandler("product not found", 404, "RESOURCE_NOT_FOUND");
   }
   
-  const response = getProductSchema.parse({ data: data });
+  const response = getProductSchema.parse({ data: productMapped });
   return response;
 }
