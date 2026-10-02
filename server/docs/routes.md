@@ -73,9 +73,9 @@ _RESPONSE_
 }
 ```
 
-### GET ```/auth/me```
+### GET `/auth/me`
 
-to get user data 
+to get user data
 
 **no queries**
 
@@ -83,17 +83,17 @@ _RESPONSE_
 
 ```json
 {
-	"data": {
-		"user_id": "",
-		"email": "",
-		"password": "",
-		"is_admin": false,
-		"is_active": true,
-		"create_at": "",
-		"update_at": ""
-	},
-	"success": true,
-	"error": null
+  "data": {
+    "user_id": "",
+    "email": "",
+    "password": "",
+    "is_admin": false,
+    "is_active": true,
+    "create_at": "",
+    "update_at": ""
+  },
+  "success": true,
+  "error": null
 }
 ```
 
@@ -122,11 +122,12 @@ _RESPONSE_
       "product_id": "",
       "title": "",
       "slug": "",
-      "price": 0,
-      "comparison_price": 0,
       "tags": ["", ""],
       "brand": "",
-      "category": ""
+      "category": "",
+      "price": 0,
+      "comparison_price": 0,
+      "image_url": ""
     }
   ],
   "pagination": {
@@ -159,6 +160,13 @@ _RESPONSE_
     "tags": [""],
     "metadata": {},
     "category": "",
+    "images": [
+      {
+        "url": "",
+        "alt": "",
+        "is_thumbnail": true
+      }
+    ]
     "variants": [
       {
         "variant_id": "",

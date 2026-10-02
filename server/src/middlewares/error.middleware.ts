@@ -14,6 +14,7 @@ export const requestError: ErrorRequestHandler = (
   res: Response,
   next: NextFunction,
 ) => {
+  console.log(err)
   if (err instanceof ErrorHandler) {
     logger.error(err.message);
     
