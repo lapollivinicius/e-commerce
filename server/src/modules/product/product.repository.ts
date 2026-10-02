@@ -5,35 +5,73 @@ import type {
   productsDataRaw,
 } from "@/modules/product/product.types.js";
 
-// TODO: apply query filters to the SQL query based on the provided query parameters
 export async function findAll(query: queryType): Promise<productsDataRaw[]> {
+  const { search, page = 1, limit = 20, category, sort = "ASC" } = query;
+  const conditions: string[] = [];
+  const values: unknown[] = [];
+
+  if (search) {
+    values.push(`%${search}%`);
+    conditions.push(`
+      (
+        p.title ILIKE $${values.length}
+        OR p.brand ILIKE $${values.length}
+      )
+    `);
+  }
+
+  if (category) {
+    values.push(category);
+    conditions.push(`c.category = $${values.length}`);
+  }
+
+  const offset = (page - 1) * limit;
+
+  values.push(limit);
+  const limitParam = `$${values.length}`;
+
+  values.push(offset);
+  const offsetParam = `$${values.length}`;
+
+  const where = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
+  const order = sort === "DESC" ? "DESC" : "ASC";
+
   const { rows } = await database.query(
     `
-    SELECT
-      p.product_id,
-      p.title,
-      p.slug,
-      p.tags,
-      p.brand,
-      c.category,
-      v.price,
-      v.comparison_price
-    FROM products p
-
-    INNER JOIN categories c
-      ON c.category_id = p.category_id
-
-    INNER JOIN LATERAL (
       SELECT
+        p.product_id,
+        p.title,
+        p.slug,
+        p.tags,
+        p.brand,
+        c.category,
         v.price,
         v.comparison_price
-      FROM variants v
-      WHERE v.product_id = p.product_id
-      ORDER BY v.variant_id
-      LIMIT 1
-    ) v ON true;
+      FROM products p
+
+      INNER JOIN categories c
+        ON c.category_id = p.category_id
+
+      INNER JOIN LATERAL (
+        SELECT
+          v.price,
+          v.comparison_price
+        FROM variants v
+        WHERE v.product_id = p.product_id
+        ORDER BY v.variant_id
+        LIMIT 1
+      ) v ON true
+
+      ${where}
+
+      ORDER BY v.price ${order}
+
+      LIMIT ${limitParam}
+      OFFSET ${offsetParam};
     `,
+    values,
   );
+
   return rows;
 }
 

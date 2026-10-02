@@ -57,11 +57,7 @@ export const querySchema = z.object({
   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().optional(),
   category: z.string().optional(),
-  featured: z
-    .enum(["true", "false"])
-    .transform((value) => value === "true")
-    .optional(),
-  sort: z.enum(["ASC", "DESC"]).optional(),
+  sort: z.string().optional(),
 });
 
 export const slugParamSchema = z.object({

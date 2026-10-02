@@ -111,7 +111,6 @@ to list all products
 - 'page'
 - 'limit'
 - 'category'
-- 'featured'
 - 'sort'
 
 _RESPONSE_
