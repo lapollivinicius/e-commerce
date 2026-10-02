@@ -1,68 +1,96 @@
 # API ROUTES
 
-**base URL:** ```/api/v1```
+**base URL:** `/api/v1`
 
 ---
 
-### AUTH
+## AUTH
 
-#### POST ```/auth/register```
+### POST `/auth/register`
 
 to register an user
 
 **no queries**
 
+_BODY_
+
 ```json
 {
-	"message": "User was registed",
-	"success": true,
-	"error": null
+  "email": "",
+  "password": "",
+  "confirm_password": ""
 }
 ```
 
-#### POST ```/auth/login```
+_RESPONSE_
+
+```json
+{
+  "message": "User was registed",
+  "success": true,
+  "error": null
+}
+```
+
+### POST `/auth/login`
 
 to login app
 
 **no queries**
 
+_BODY_
+
 ```json
 {
-	"message": "login successful",
-	"success": true,
-	"error": null
+  "email": "",
+  "password": ""
 }
 ```
 
-#### POST ```/auth/logout```
+_RESPONSE_
+
+```json
+{
+  "message": "login successful",
+  "success": true,
+  "error": null
+}
+```
+
+### POST `/auth/logout`
 
 to logout app
 
 **no queries**
 
+_NO BODY_
+
 ```json
 {
-	"message": "logout successful",
-	"success": true,
-	"error": null
+  "message": "logout successful",
+  "success": true,
+  "error": null
 }
 ```
 
 ---
 
-### PRODUCTS
+## PRODUCTS
 
-#### GET ```/products```
+### GET `/products`
 
-list products
+to list all products
 
 **Query params**
+
 - 'search'
-- 'page' 
+- 'page'
 - 'limit'
 - 'category'
 - 'featured'
 - 'sort'
+
+_RESPONSE_
 
 ```json
 {
@@ -85,13 +113,17 @@ list products
     "sort": ""
   },
   "success": true,
-  "error": null,
+  "error": null
 }
 ```
 
-#### GET ```/products/:slug```
+### GET `/products/:slug`
+
+to get product detailed using slug
 
 **no queries**
+
+_RESPONSE_
 
 ```json
 {
@@ -125,20 +157,25 @@ list products
     ]
   },
   "success": true,
-  "error": null,
+  "error": null
 }
 ```
 
 ---
 
-### CATEGORIES
+## CATEGORIES
 
-#### GET ```/categories```
+### GET `/categories`
+
+to get all categories
 
 **Query params**
+
 - 'limit'
 - 'featured'
 - 'sort'
+
+_RESPONSE_
 
 ```json
 {
@@ -159,9 +196,13 @@ list products
 }
 ```
 
-#### GET ```/categories/:slug```
+### GET `/categories/:slug`
+
+to get category using slug
 
 **no queries**
+
+_RESPONSE_
 
 ```json
 {
@@ -174,6 +215,99 @@ list products
       "description": ""
     }
   ],
+  "success": true,
+  "error": null
+}
+```
+
+## ORDERS
+
+### GET `/orders`
+
+to get all orders (user need to be authenticated)
+
+**queries**
+
+- 'sort'
+- 'search'
+- 'page'
+- 'limit'
+
+_RESPONSE_
+
+```json
+{
+  "data": [
+    {
+      "order_id": "",
+      "amount": 0,
+      "status": "",
+      "created_at": "",
+      "items": [
+        {
+          "product_id": "",
+          "variant_id": "",
+          "title": "",
+          "slug": "",
+          "quantity": 0,
+          "unit_price": 0,
+          "options": [
+            {
+              "name": "",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "page": 0,
+    "limit": 0,
+    "total": 0
+  },
+  "success": true,
+  "error": null
+}
+```
+
+### GET `/orders/:order_id`
+
+to get an order (user need to be authenticated)
+
+**no queries**
+
+_RESPONSE_
+
+```json
+{
+  "data": {
+    "order_id": "",
+    "amount": 0,
+    "status": "",
+    "created_at": "",
+    "first_name": "",
+    "last_name": "",
+    "city": "",
+    "state": "",
+    "items": [
+      {
+        "product_id": "",
+        "variant_id": "",
+        "title": "",
+        "slug": "",
+        "sku": "",
+        "quantity": 0,
+        "unit_price": 0,
+        "options": [
+          {
+            "name": "",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
   "success": true,
   "error": null
 }
